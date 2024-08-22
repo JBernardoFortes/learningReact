@@ -1,0 +1,16 @@
+{
+  "blogs": [
+    {
+      "id": "f550",
+      "title": "Bernardo",
+      "body": "Bernardo eh foda",
+      "author": "Bernardo"
+    },
+    {
+      "id": "f455",
+      "title": "Bernardo",
+      "body": "Bernardo eh foda ",
+      "author": "100"
+    }
+  ]
+}
