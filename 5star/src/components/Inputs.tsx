@@ -1,9 +1,24 @@
+import { motion } from "framer-motion";
+
 interface Props {
   show: boolean;
   handleImage: () => void;
   handleText: () => void;
+  handleAuthor: () => void;
+  handleHide: () => void;
 }
-const Inputs = ({ show, handleImage, handleText }: Props) => {
+
+const Inputs = ({
+  show,
+  handleImage,
+  handleText,
+  handleAuthor,
+  handleHide,
+}: Props) => {
+  const animation = {
+    initial: { opacity: 0, y: 100 },
+    animate: { opacity: 1, y: 0 },
+  };
   // let [image, setImage] = useState("");
   // let [title, setTitle] = useState("");
 
@@ -43,40 +58,92 @@ const Inputs = ({ show, handleImage, handleText }: Props) => {
     // setTitle(text);
     handleText();
   };
+  const handleAuthorTrigger = () => {
+    handleAuthor();
+  };
+  const handleHideTrigger = () => {
+    handleHide();
+  };
   return (
-    <section className="inputs">
-      {/* {<img src={image} className="imageOutput"></img>}
+    show && (
+      <motion.section
+        className="inputs"
+        variants={animation}
+        initial={animation.initial}
+        animate={animation.animate}
+      >
+        {/* {<img src={image} className="imageOutput"></img>}
       {<h1 className="textOutput"> {title}</h1>} */}
 
-      <div className="inputWrap">
-        <input
-          type="file"
-          id="image"
-          name="image"
-          onChange={() => {
-            handleImageTrigger();
-          }}
-        ></input>
-        {show && (
-          <label htmlFor="image" className="imageInput">
-            {" "}
-            Select file{" "}
-          </label>
-        )}
-        {show && (
+        <div className="inputWrap">
           <input
-            type="text"
-            name=""
-            id="title"
+            type="file"
+            id="image"
+            name="image"
             onChange={() => {
-              handleTextTrigger();
+              handleImageTrigger();
             }}
-            className="textInput"
-            placeholder="Enter the title"
-          />
-        )}
-      </div>
-    </section>
+          ></input>
+
+          {show && (
+            <motion.input
+              variants={animation}
+              initial={animation.initial}
+              animate={animation.animate}
+              type="text"
+              name=""
+              id="title"
+              onChange={() => {
+                handleTextTrigger();
+              }}
+              className="textInput"
+              placeholder="Enter the title"
+            />
+          )}
+          {show && (
+            <motion.input
+              variants={animation}
+              initial={animation.initial}
+              animate={animation.animate}
+              type="text"
+              name=""
+              id="author"
+              onChange={() => {
+                handleAuthorTrigger();
+              }}
+              className="textInput"
+              placeholder="Enter the author"
+            />
+          )}
+          {show && (
+            <motion.label
+              variants={animation}
+              initial={animation.initial}
+              animate={animation.animate}
+              htmlFor="image"
+              className="imageInput"
+            >
+              {" "}
+              Select file{" "}
+            </motion.label>
+          )}
+          {show && (
+            <motion.button
+              variants={animation}
+              initial={animation.initial}
+              animate={animation.animate}
+              onClick={() => {
+                handleHideTrigger();
+              }}
+              className="btn"
+              id="hide"
+            >
+              X
+            </motion.button>
+          )}
+        </div>
+      </motion.section>
+    )
   );
 };
 

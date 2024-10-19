@@ -2,13 +2,20 @@ import Stars from "./components/Stars.tsx";
 import Inputs from "./components/Inputs.tsx";
 import Output from "./components/Output.tsx";
 import "./assets/styles/styles.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ColorThief from "../node_modules/colorthief/dist/color-thief.mjs";
+import { motion } from "framer-motion";
 
 function App() {
   let [hide, setHide] = useState(true);
   let [image, setImage] = useState("");
   let [title, setTitle] = useState("");
+  let [author, setAuthor] = useState("");
+
+  const animation = {
+    initial: { opacity: 0, y: 100 },
+    animate: { opacity: 1, y: 0 },
+  };
 
   const handleHide = () => {
     setHide(!hide);
@@ -27,6 +34,10 @@ function App() {
   const handleText = () => {
     const text = document.getElementById("title").value;
     setTitle(text);
+  };
+  const handleAuthor = () => {
+    const author = document.getElementById("author").value;
+    setAuthor(author);
   };
 
   const changeBG = () => {
@@ -56,22 +67,35 @@ function App() {
   return (
     <>
       <div className="compWrap">
-        <Output image={image} title={title} handleBG={changeBG} />
+        <Output
+          image={image}
+          title={title}
+          handleBG={changeBG}
+          author={author}
+        />
         <Stars />
         <Inputs
           show={hide}
           handleImage={handleImage}
           handleText={handleText}
+          handleAuthor={handleAuthor}
+          handleHide={handleHide}
         ></Inputs>
       </div>
-      <button
-        onClick={() => {
-          handleHide();
-        }}
-        className = 'btn'
-      >
-        hide
-      </button>
+      {!hide && (
+        <motion.button
+          variants={animation}
+          initial={animation.initial}
+          animate={animation.animate}
+          onClick={() => {
+            handleHide();
+          }}
+          className="btn"
+          id="showOptions"
+        >
+          X{" "}
+        </motion.button>
+      )}
     </>
   );
 }

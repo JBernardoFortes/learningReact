@@ -5,10 +5,12 @@ interface Props {
   image: any;
   title: string;
   handleBG: () => void;
+  author: string;
 }
-const Output = ({ image, title, handleBG }: Props) => {
+const Output = ({ image, title, handleBG, author }: Props) => {
   let [imageSt, setImage] = useState("");
   let [titleSt, setTitle] = useState("");
+  let [authorSt, setAuthor] = useState("");
 
   const animation = {
     initial: { opacity: 0, y: 100 },
@@ -18,7 +20,8 @@ const Output = ({ image, title, handleBG }: Props) => {
   useEffect(() => {
     setImage(image);
     setTitle(title);
-  }, [image, title]);
+    setAuthor(author);
+  }, [image, title, author]);
   return (
     <div className="outputs">
       {
@@ -35,6 +38,7 @@ const Output = ({ image, title, handleBG }: Props) => {
         ></motion.img>
       }
       {<h1 className="textOutput"> {titleSt}</h1>}
+      {<h1 className="textOutput2"> {authorSt}</h1>}
     </div>
   );
 };
