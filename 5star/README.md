@@ -1,1 +1,1 @@
-#5 stars rating template
+# 5 stars rating template
