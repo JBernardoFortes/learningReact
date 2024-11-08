@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap");
+* {
+  --red-pantone: #e63946ff;
+  --honeydew: #f1faeeff;
+  --non-photo-blue: #a8dadcff;
+  --cerulean: #457b9dff;
+  --berkeley-blue: #1d3557ff;
+  font: 5vh "Roboto Slab";
+}
+
+body {
+  background-color: var(--berkeley-blue);
+  color: var(--honeydew);
+}
+
+.home {
+  width: 50%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5vw;
+  padding: 1vw;
+}
+.home .button {
+  cursor: pointer;
+  background-color: var(--non-photo-blue);
+  color: var(--berkeley-blue);
+  border: none;
+  width: 10vw;
+  height: 7vh;
+  font-size: 2vw;
+  transition: background-color 0.1s linear;
+  border-radius: 0.2em;
+}
+.home .button:hover {
+  background-color: var(--honeydew);
+}
+.home .button:active {
+  background-color: var(--red-pantone);
+}
+.home .timer {
+  cursor: default;
+}
+.home .counter {
+  cursor: default;
+}
+.home .button:focus {
+  outline: none;
+}
+.home .desactive {
+  background-color: var(--cerulean);
+  cursor: not-allowed;
+}
+.home .desactive:hover {
+  background-color: var(--cerulean);
+}
+
+.timer span::after {
+  content: "";
+  display: block;
+  width: 100%;
+  position: relative;
+  background-color: white;
+  height: 2px;
+  transition: transform 0.5s ease;
+  transform: scale(0);
+}
+
+.timer:hover span::after {
+  transform: scale(1);
+}
+
+.counter span::after {
+  content: "";
+  display: block;
+  width: 100%;
+  position: relative;
+  background-color: white;
+  height: 2px;
+  transition: transform 0.5s ease;
+  transform: scale(0);
+}
+
+.counter:hover span::after {
+  transform: scale(1);
+}/*# sourceMappingURL=index.css.map */
