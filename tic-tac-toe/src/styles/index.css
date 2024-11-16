@@ -1,0 +1,116 @@
+@import url("https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Roboto+Slab:wght@100..900&display=swap");
+* {
+  --falu-red: #6f1d1bff;
+  --lion: #bb9457ff;
+  --bistre: #432818ff;
+  --brown: #99582aff;
+  --peach: #ffe6a7ff;
+}
+
+body {
+  background-color: var(--bistre);
+  color: var(--peach);
+}
+body .app {
+  font-family: "Geist Mono";
+}
+body .app .game {
+  margin-top: 2vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3vh;
+}
+body .app .game .text {
+  cursor: default;
+  font-weight: bold;
+  letter-spacing: 3px;
+  position: relative;
+  transition: filter 0.3s ease;
+  font-size: 1.3em;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+body .app .game .feedback {
+  font-size: 0.8em;
+}
+body .app .game .button {
+  margin-top: 2vh;
+  width: 13vw;
+  height: 8vh;
+  border-radius: 0.5em;
+  cursor: pointer;
+  font-size: 1.3em;
+  letter-spacing: 3px;
+  font-family: "Geist Mono";
+  border: solid var(--lion) 1px;
+  background-color: var(--brown);
+  color: var(--peach);
+  transition: background-color 0.1s ease, color 0.3s ease;
+}
+body .app .game .button:focus {
+  border: solid var(--lion) 1px;
+}
+body .app .game .button:hover {
+  background-color: var(--lion);
+  color: var(--bistre);
+}
+body .app .game .button:active {
+  background-color: var(--peach);
+}
+body .app .game .currentTurn {
+  height: 3vh;
+}
+body .app .game .board {
+  width: 40%;
+  height: 50vh;
+  gap: 1.5vw;
+  font-size: 2em;
+  display: grid;
+  margin: auto;
+  grid-template: repeat(3, 1fr)/repeat(3, 1fr);
+  justify-content: center;
+}
+body .app .game .board .square {
+  background-color: var(--brown);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 0.3em;
+  transition: all 0.25s linear;
+}
+body .app .game .board .square .insideSquare {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+body .app .game .board .square:hover {
+  filter: brightness(1.5);
+}
+body .app .board:hover > :not(.square:hover) {
+  opacity: 0.5;
+}
+
+.text span::after {
+  position: relative;
+  display: block;
+  content: "";
+  width: 100%;
+  height: 1px;
+  background-color: var(--peach);
+  transform: scale(0);
+  transition: transform 0.2s linear;
+}
+
+.text:hover span::after {
+  transform: scale(1);
+}
+
+.text:hover {
+  filter: brightness(1.1);
+}/*# sourceMappingURL=index.css.map */
