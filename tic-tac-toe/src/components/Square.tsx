@@ -15,6 +15,7 @@ const Square = ({ value, handleClick }: Props) => {
       initial="initial"
       animate="animate"
       className="insideSquare"
+      key={value}
       onClick={
         handleClick as unknown as React.MouseEventHandler<HTMLDivElement>
       }
