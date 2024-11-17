@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Board from "./Board.tsx";
 import { motion } from "motion/react";
 
@@ -22,17 +22,25 @@ const Game = () => {
       const [a, b, c] = possibleWinners[i];
       if (board[a] && board[a] == board[b] && board[a] == board[c]) {
         // Passa pelos indices dos possiveis ganhadores no board ^^
+        setWinPath([a, b, c]);
+        console.log(board[a]);
         return board[a]; // retorna o valor que venceu (X ou O)
       }
     }
     return null;
   };
   const feedBack = (board: any[], winner: any) => {
-    if (winner) {
+    console.log(winner + "TESTE");
+    if (winner == "X" || winner == "O") {
+      startButton?.classList.add("reset");
+      setIsGoing(0);
+
       return `Winner : ${winner}`;
     } else if (board.includes(null)) {
       return `Current turn : ${xTurn ? "X" : "O"}`;
     } else {
+      startButton?.classList.add("reset");
+
       return "No winner";
     }
   };
@@ -43,26 +51,42 @@ const Game = () => {
 
   const [xTurn, setXTurn] = useState(true); // manter o track dos turnos
 
-  const winner = calculateWinner(board); // toda vez que atualizar o valor do board vai ser calculado de novo o vencedor ^^
+  const [winPath, setWinPath] = useState(Array(3).fill(null));
+
+  const startButtonRef = useRef<HTMLButtonElement>(null);
+  let startButton = startButtonRef.current;
+  // let winner = calculateWinner(board); // toda vez que atualizar o valor do board vai ser calculado de novo o vencedor ^^
+
+  const [winner, setWinner] = useState(null);
+  // let winner: any = null;
   // Calcular winner
   useEffect(() => {
-    setFeedback(feedBack(board, winner));
+    const winnerCalculated = calculateWinner(board);
+    setWinner(winnerCalculated);
+    // console.log(winner);
+    setFeedback(feedBack(board, winnerCalculated));
   }, [board]);
+
+  // useEffect(() => {
+  //   // adicionar a classe winPath nos indices que estao no winPath
+
+  // }, winPath);
+
   const [isGoing, setIsGoing] = useState(0);
   const handleClick = (i: number) => {
     // O i eh o indice do quadrado que foi clicado
     // Verificar se ja tem um ganhador ou se o quadrado ja esta preenchido
     const tempBoard = [...board];
-    if (!!winner) {
+    if (winner || !!tempBoard[i]) {
       setIsGoing(0);
       return;
-    } else if (!!tempBoard[i]) {
-      return;
     }
+
     // if (!!winner || !!tempBoard[i]) {
     //   return;
     // } // verifica se ja tem um vencedor ou se o quadrado ja esta preenchido
     tempBoard[i] = xTurn ? "X" : "O"; // atribui o valor no square de acordo com o turno
+    // console.log(winner);
     setBoard(tempBoard); // atualiza o board
     setXTurn(!xTurn); // Muda o turno para o proximo
     setIsGoing(1);
@@ -70,9 +94,12 @@ const Game = () => {
   const resetBoard = () => {
     return (
       <button
-        className="button"
+        className="button start"
+        ref={startButtonRef}
         onClick={() => {
+          startButton?.classList.remove("reset");
           setBoard(Array(9).fill(null));
+          setWinPath(winPath.fill(null));
           setIsGoing(0);
         }}
       >
@@ -109,7 +136,7 @@ const Game = () => {
           {feedback}
         </motion.span>
       </p>
-      <Board board={board} handleClick={handleClick} />
+      <Board board={board} handleClick={handleClick} winPath={winPath} />
       {resetBoard()}
     </motion.div>
   );

@@ -43,8 +43,6 @@ body {
         letter-spacing: 3px;
         font-family: "Geist Mono";
         border: solid var(--lion) 1px;
-        background-color: var(--brown);
-        color: var(--peach);
         transition: background-color 0.1s ease, color 0.3s ease;
       }
       .button:focus {
@@ -57,6 +55,7 @@ body {
       .button:active {
         background-color: var(--peach);
       }
+
       .currentTurn {
         height: 3vh;
       }
@@ -90,12 +89,43 @@ body {
           filter: brightness(1.5);
         }
       }
-    }
-    .board:hover > :not(.square:hover) {
-      opacity: 0.5;
+      .board:hover > :not(.square:hover) {
+        opacity: 0.5;
+      }
     }
   }
 }
+.start {
+  background-color: var(--brown);
+  color: var(--peach);
+}
+.start:hover {
+  background-color: var(--peach);
+  color: var(--brown);
+}
+.reset {
+  background-color: var(--peach);
+  color: var(--bistre);
+}
+.reset:hover {
+  background-color: var(--peach);
+  color: var(--bistre);
+}
+.winnerPath {
+  background-color: var(--peach);
+  color: var(--bistre);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 0.3em;
+  transition: all 0.25s linear;
+}
+.winnerPath:hover {
+  background-color: var(--bistre);
+  color: var(--peach);
+}
+
 .text span::after {
   position: relative;
   display: block;

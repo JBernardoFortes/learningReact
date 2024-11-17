@@ -21,8 +21,9 @@ const squareVariants = {
 interface Props {
   board: any[];
   handleClick: (i: number) => any;
+  winPath: any[];
 }
-const Board = ({ board, handleClick  }: Props) => {
+const Board = ({ board, handleClick, winPath }: Props) => {
   return (
     <motion.div
       variants={animation}
@@ -31,11 +32,16 @@ const Board = ({ board, handleClick  }: Props) => {
       className="board"
     >
       {board.map((square, index) => (
-        <motion.div variants={squareVariants} className="square" key={index}>
+        <motion.div
+          variants={squareVariants}
+          className={winPath.includes(index) ? "winnerPath" : "square"}
+          key={index}
+        >
           <Square
             value={square}
             key={index}
             handleClick={() => handleClick(index)}
+            // winSquare={winPath.includes(index) ? true : false}
           />
         </motion.div>
       ))}
